@@ -11,7 +11,7 @@ concurrency:
 jobs:
   services-availability:
     name: Check Service Availability 🛜
-    if: github.julienbenjamin == 'julienbenjamin'
+    if: github.repository_owner == 'julienbenjamin'
     runs-on: macos-14
     permissions:
       checks: write
@@ -98,7 +98,7 @@ jobs:
 
   upload-language-files:
     name: Upload Language Files 🌐
-    if: github.julienbenjamin == 'julienbenjamin' && github.ref_name == 'master'
+    if: github.repository_owner == 'julienbenjamin' && github.ref_name == 'master'
     runs-on: ubuntu-22.04
     steps:
       - uses: actions/checkout@v4
@@ -141,7 +141,7 @@ jobs:
   steam-upload:
     name: Upload Steam Builds 🚂
     needs: [build-project]
-    if: github.julienbenjamin == 'julienbenjamin'
+    if: github.repository_owner == 'julienbenjamin'
     runs-on: macos-14
     defaults:
       run:
@@ -172,4 +172,4 @@ jobs:
           steamUser: ${{ secrets.STEAM_USER }}
           steamPassword: ${{ secrets.STEAM_PASSWORD }}
           workflowSecret: ${{ secrets.GITHUB_TOKEN }}
-          preview: ${{ github.julienbenjamin != 'julienbenjamin' }}
+          preview: ${{ github.repository_owner != 'julienbenjamin' }}
